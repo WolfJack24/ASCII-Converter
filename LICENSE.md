@@ -21,5 +21,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-[Website](https:\\\\wj24.mit-license.org/)
+https://wj24.mit-license.org/
 
