@@ -118,7 +118,7 @@ namespace Window
                         using (StreamWriter writer = File.AppendText(output_path))
                         {
                             writer.WriteLine(
-                                            "Dialog" + "\n" + 
+                                            "Dialog Save" + "\n" + 
                                             "--------------------" + "\n" +
                                             converted_text
                                         );
