@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using Python.Runtime;
 
-
 namespace Window
 {
     public class Program
