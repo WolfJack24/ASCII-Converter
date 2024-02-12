@@ -39,6 +39,8 @@ namespace Window
             ConvertBtn = new Button();
             SaveFileBtn = new Button();
 
+            MainWindow.Text = "ASCII Converter";
+
             ConversionBox.Size = new Size(121, 21);
             ConversionBox.Location = new Point(80, 25);
 
