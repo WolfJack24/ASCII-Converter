@@ -9,7 +9,7 @@ namespace Window
     public class Program
     {
         static string output_path = @"G:\VSC\Python\Converter_(ASCII_to_Whatever)\output.txt";
-        static string conversion_path = @"G:\VSC\Python\Converter_(ASCII_to_Whatever)\conversion\";
+        static string conversion_path = Environment.CurrentDirectory + "\\conversion";
         static string python_path = @"C:\Users\Denzil Schroder\AppData\Local\Programs\Python\Python312\python312.dll";
 
         static Form MainWindow;
