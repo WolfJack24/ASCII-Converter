@@ -13,14 +13,14 @@ Your project location gets set automatically but you can edit the `FileName` to 
 or whatever suites you.
 
 ```csharp
-    static readonly string FileName = "output.txt";
-    static readonly string OutputPath = Path.Combine(Environment.CurrentDirectory, FileName);
+static readonly string FileName = "output.txt";
+static readonly string OutputPath = Path.Combine(Environment.CurrentDirectory, FileName);
 ```
 
 The conversion filepath gets set automatically now, no more manual updating.
 
 ```csharp
-    static readonly string ConversionPath = Path.Combine(Environment.CurrentDirectory, "conversion\\");
+static readonly string ConversionPath = Path.Combine(Environment.CurrentDirectory, "conversion\\");
 ```
 
 Your Python .dll is more private now by using a `.env` file.
@@ -33,14 +33,14 @@ PYTHON_PATH="Python .dll Path"
 It is then loaded in the `Main` function:
 
 ```csharp
-    var dotenv = Path.Combine(Environment.CurrentDirectory, ".env");
-    DotEnv.Load(dotenv);
+var dotenv = Path.Combine(Environment.CurrentDirectory, ".env");
+DotEnv.Load(dotenv);
 ```
 
 And finally added to the global variable `PythonPath`:
 
 ```csharp
-    static readonly string PythonPath = Environment.GetEnvironmentVariable("PYTHON_PATH");
+static readonly string PythonPath = Environment.GetEnvironmentVariable("PYTHON_PATH");
 ```
 
 ## Dependencies
