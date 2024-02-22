@@ -4,3 +4,6 @@ obj/
 
 # Ignore Python cache directory
 conversion/__pycache__/
+
+# Ignore output files
+output.txt
