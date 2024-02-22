@@ -9,22 +9,22 @@ and can be found in the Json file.
 
 This project depends on local paths:
 
-Add your project location to `output_path` and add `output.txt` or whatever suites you.
+Add your project location to `outputPath` and add `output.txt` or whatever suites you.
 
 ```csharp
-static string output_path = @"This is where the txt file gets placed";
+static string outputPath = @"This is where the txt file gets placed";
 ```
 
-Add the path to the `conversion` folder in your project to `conversion_path`.
+Add the path to the `conversion` folder in your project to `conversionPath`.
 
 ```csharp
-static string conversion_path = @"The location for converting the ASCII into whatever";
+static string conversionPath = @"The location for converting the ASCII into whatever";
 ```
 
-Add you Python .dll file to `python_path`.
+Add you Python .dll file to `pythonPath`.
 
 ```csharp
-static string python_path = @"The Python path";
+static string pythonPath = @"The Python path";
 ```
 
 ## Dependencies
