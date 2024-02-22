@@ -27,7 +27,7 @@ Your Python .dll is more private now by using a `.env` file.
 This is what your .env file should look like:
 
 ```properties
-PYTHON_PATH="Python .dll Path"
+PYTHON_PATH=Python .dll Path
 ```
 
 It is then loaded in the `Main` function:
@@ -40,7 +40,7 @@ DotEnv.Load(dotenv);
 And finally added to the global variable `PythonPath`:
 
 ```csharp
-static readonly string PythonPath = Environment.GetEnvironmentVariable("PYTHON_PATH");
+static readonly string PythonPath = Convert.ToString(Environment.GetEnvironmentVariable("PYTHON_PATH"));
 ```
 
 ## Dependencies
