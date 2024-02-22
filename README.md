@@ -7,35 +7,52 @@ and can be found in the Json file.
 
 ## Local Paths
 
-This project depends on local paths:
+### This project depends on local paths:
 
-Add your project location to `outputPath` and add `output.txt` or whatever suites you.
+Your project location gets set automatically but you can edit the `FileName` to `output.txt`
+or whatever suites you.
 
 ```csharp
-static string outputPath = @"This is where the txt file gets placed";
+    static readonly string FileName = "output.txt";
+    static readonly string OutputPath = Path.Combine(Environment.CurrentDirectory, FileName);
 ```
 
-Add the path to the `conversion` folder in your project to `conversionPath`.
+The conversion filepath gets set automatically now, no more manual updating.
 
 ```csharp
-static string conversionPath = @"The location for converting the ASCII into whatever";
+    static readonly string ConversionPath = Path.Combine(Environment.CurrentDirectory, "conversion\\");
 ```
 
-Add you Python .dll file to `pythonPath`.
+Your Python .dll is more private now by using a `.env` file.
+This is what your .env file should look like:
+
+```properties
+PYTHON_PATH="Python .dll Path"
+```
+
+It is then loaded in the `Main` function:
 
 ```csharp
-static string pythonPath = @"The Python path";
+    var dotenv = Path.Combine(Environment.CurrentDirectory, ".env");
+    DotEnv.Load(dotenv);
+```
+
+And finally added to the global variable `PythonPath`:
+
+```csharp
+    static readonly string PythonPath = Environment.GetEnvironmentVariable("PYTHON_PATH");
 ```
 
 ## Dependencies
 
 Needs:
 
-- net6.0
+- .net6.0
 - pythonnet v3.0.3
 - Python v3.12.0
 - DotNet installed locally
 
 ## Quick Start
 
-To get started, `dotnet restore` to get the `obj` folder and when done, `dotnet run` to get everything sorted.
+To get started, `dotnet restore` to get the build directory's
+and when done, `dotnet run` to get everything sorted.
