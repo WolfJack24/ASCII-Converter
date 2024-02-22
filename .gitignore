@@ -7,3 +7,6 @@ conversion/__pycache__/
 
 # Ignore output files
 output.txt
+
+# Ignore .env file
+.env
