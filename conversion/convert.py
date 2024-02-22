@@ -3,7 +3,7 @@ The only module is json as this is a basic .py file
 '''
 import json
 
-with open(".\\conversion\\ASCII.json", "r", encoding="UTF-8") as f:
+with open("ASCII.json", "r", encoding="UTF-8") as f:
     # pylint: disable=invalid-name
     ASCII = json.load(f)
 
@@ -18,13 +18,13 @@ def locate_item(key: str, search_item: str) -> str:
     return None
 
 
-def give_value(string_name: str, conversion: str) -> str:
+def give_value(line: str, conversion: str) -> str:
     '''
     Gives the value of the item in the json file
     '''
     text = ''
 
-    for char in string_name:
+    for char in line:
         value = locate_item(conversion, char)
         if value is not None:
             text += value + " "
