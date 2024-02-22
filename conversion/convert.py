@@ -1,9 +1,12 @@
 '''
 The only module is json as this is a basic .py file
 '''
+import os
 import json
 
-with open("ASCII.json", "r", encoding="UTF-8") as f:
+path = os.getcwd()
+
+with open(path + "\\conversion\\ASCII.json", "r", encoding="UTF-8") as f:
     # pylint: disable=invalid-name
     ASCII = json.load(f)
 
