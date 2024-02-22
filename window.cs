@@ -8,11 +8,11 @@ namespace Window
 {
     public class Program
     {
-        static string FileName = "output.txt";
+        static readonly string FileName = "output.txt";
 
-        static string OutputPath = Path.Combine(Environment.CurrentDirectory, FileName);
-        static string ConversionPath = Path.Combine(Environment.CurrentDirectory, "conversion\\");
-        static string PythonPath = Convert.ToString(Environment.GetEnvironmentVariable("PYTHON_PATH"));
+        static readonly string OutputPath = Path.Combine(Environment.CurrentDirectory, FileName);
+        static readonly string ConversionPath = Path.Combine(Environment.CurrentDirectory, "conversion\\");
+        static readonly string PythonPath = Environment.GetEnvironmentVariable("PYTHON_PATH");
 
         static Form mainWindow;
         static TextBox conversionBox;
