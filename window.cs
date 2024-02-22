@@ -8,9 +8,11 @@ namespace Window
 {
     public class Program
     {
-        static string output_path = @"G:\VSC\Python\Converter_(ASCII_to_Whatever)\output.txt";
-        static string conversion_path = Environment.CurrentDirectory + "\\conversion";
-        static string python_path = @"C:\Users\Denzil Schroder\AppData\Local\Programs\Python\Python312\python312.dll";
+        static string fileName = "output.txt";
+
+        static string outputPath = Path.Combine(Environment.CurrentDirectory, "\\", fileName);
+        static string conversionPath = Path.Combine(Environment.CurrentDirectory, "\\", "conversion");
+        static string pythonPath = @"C:\Users\Denzil Schroder\AppData\Local\Programs\Python\Python312\python312.dll";
 
         static Form MainWindow;
         static TextBox ConversionBox;
@@ -29,7 +31,7 @@ namespace Window
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Runtime.PythonDLL = python_path;
+            Runtime.PythonDLL = pythonPath;
             PythonEngine.Initialize();
 
             MainWindow = new Form();
@@ -76,7 +78,7 @@ namespace Window
             using (Py.GIL())
             {
                 dynamic sys = Py.Import("sys");
-                sys.path.append(conversion_path);
+                sys.path.append(conversionPath);
 
                 var script = Py.Import("convert");
                 var PyText = new PyString(text);
@@ -116,7 +118,7 @@ namespace Window
 
                     if (BoxResult == DialogResult.Yes)
                     {
-                        using (StreamWriter writer = File.AppendText(output_path))
+                        using (StreamWriter writer = File.AppendText(outputPath))
                         {
                             writer.WriteLine(
                                             "Dialog Save" + "\n" + 
@@ -148,7 +150,7 @@ namespace Window
                 {
                     string converted_text = Convert(text, opt);
 
-                    using (StreamWriter writer = File.AppendText(output_path))
+                    using (StreamWriter writer = File.AppendText(outputPath))
                     {
                         writer.WriteLine(
                                         "Save without Dialog" + "\n" + 
