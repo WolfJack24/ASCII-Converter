@@ -2,8 +2,9 @@
 bin/
 obj/
 
-# Ignore Python cache directory
+# Ignore Python cache directory and main.py file
 conversion/__pycache__/
+conversion/main.py
 
 # Ignore output files
 output.txt
