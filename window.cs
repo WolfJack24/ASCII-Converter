@@ -117,7 +117,11 @@ namespace Window
                 {
                     string converted_text = ConvertString(text, opt);
 
-                    DialogResult BoxResult = MessageBox.Show(converted_text + "\n" + "Do you want to save?", "Converted!", MessageBoxButtons.YesNo);
+                    DialogResult BoxResult = MessageBox.Show(
+                                                            converted_text + "\n" + "Do you want to save?", 
+                                                            "Converted!", 
+                                                            MessageBoxButtons.YesNo
+                                                        );
 
                     if (BoxResult == DialogResult.Yes)
                     {
