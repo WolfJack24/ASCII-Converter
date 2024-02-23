@@ -6,9 +6,12 @@ import json
 
 path = os.getcwd()
 
-with open(path + "\\conversion\\ASCII.json", "r", encoding="UTF-8") as f:
-    # pylint: disable=invalid-name
-    ASCII = json.load(f)
+try:
+    with open(path + "\\conversion\\ASCII.json", "r", encoding="UTF-8") as f:
+        # pylint: disable=invalid-name
+        ASCII = json.load(f)
+finally:
+    f.close()
 
 
 def locate_item(key: str, search_item: str) -> str:
