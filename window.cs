@@ -37,27 +37,36 @@ namespace Window
             Runtime.PythonDLL = PythonPath;
             PythonEngine.Initialize();
 
-            mainWindow = new Form();
-            conversionBox = new TextBox();
-            options = new ComboBox();
-            convertBtn = new Button();
-            saveFileBtn = new Button();
+            mainWindow = new Form
+            {
+                Text = "ASCII Converter"
+            };
 
-            mainWindow.Text = "ASCII Converter";
+            conversionBox = new TextBox
+            {
+                Size = new Size(121, 21),
+                Location = new Point(80, 25)
+            };
 
-            conversionBox.Size = new Size(121, 21);
-            conversionBox.Location = new Point(80, 25);
+            options = new ComboBox
+            {
+                Size = new Size(121, 21),
+                Location = new Point(80, 50)
+            };
 
-            options.Size = new Size(121, 21);
-            options.Location = new Point(80, 50);
+            convertBtn = new Button
+            {
+                Text = "Convert!",
+                Size = new Size(121, 21),
+                Location = new Point(80, 75)
+            };
 
-            convertBtn.Text = "Convert!";
-            convertBtn.Size = new Size(121, 21);
-            convertBtn.Location = new Point(80, 75);
-
-            saveFileBtn.Text = "Save?";
-            saveFileBtn.Size = new Size(121, 21);
-            saveFileBtn.Location = new Point(80, 96);
+            saveFileBtn = new Button
+            {
+                Text = "Save?",
+                Size = new Size(121, 21),
+                Location = new Point(80, 96)
+            };
 
             options.Items.Add("Binary");
             options.Items.Add("Decimal");
