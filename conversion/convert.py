@@ -1,42 +1,43 @@
-'''
-    This is the backend to my conversion app.
-    It has two functions:
-    - locate_item(key -> str, search_item -> str) returns str index of item - search_item
-    - give_value(line -> str, conversion -> str) returns values as str 
-'''
+"""
+This is the backend to my conversion app.
+It has two functions:
+- locate_item(key -> str, search_item -> str) returns str index of item - search_item
+- give_value(line -> str, conversion -> str) returns values as str
+"""
+
+import sys
 import os
 import json
 
+os.chdir(sys.path[-1]) # This is Not Conventional, but it works for this project.
+
 path = os.getcwd()
 
-try:
-    with open(path + "\\conversion\\ASCII.json", "r", encoding="UTF-8") as f:
-        # pylint: disable=invalid-name
-        ASCII = json.load(f)
-finally:
-    f.close()
+with open(os.path.join(path, "ASCII.json"), "r", encoding="UTF-8") as f:
+    # pylint: disable=invalid-name
+    ASCII = json.load(f)
 
 
-def locate_item(key: str, search_item: str) -> str:
-    '''
-        This returns a single item finding.
+def locate_item(key: str, search_item: str) -> str | None:
+    """
+    This returns a single item finding.
 
-        ```
-        from convert import locate_item
+    ```
+    from convert import locate_item
 
-        string = "A"
-        conversion = "Hexadecimal"
+    string = "A"
+    conversion = "Hexadecimal"
 
-        value_of_single_item = locate_item(conversion, string)
+    value_of_single_item = locate_item(conversion, string)
 
-        print(value_of_single_item)
-        ```
+    print(value_of_single_item)
+    ```
 
-        Output:
-        ```
-        41
-        ```
-    '''
+    Output:
+    ```
+    41
+    ```
+    """
     for item in ASCII[key]:
         if search_item in item:
             return str(ASCII[key][search_item])
@@ -44,26 +45,26 @@ def locate_item(key: str, search_item: str) -> str:
 
 
 def give_value(line: str, conversion: str) -> str:
-    '''
-        This returns a full string item finding.
+    """
+    This returns a full string item finding.
 
-        ```
-        from convert import give_value
+    ```
+    from convert import give_value
 
-        string = "string value"
-        conversion = "Hexadecimal"
+    string = "string value"
+    conversion = "Hexadecimal"
 
-        value_of_full_string = give_value(string, conversion)
+    value_of_full_string = give_value(string, conversion)
 
-        print(value_of_full_string)
-        ```
+    print(value_of_full_string)
+    ```
 
-        Output:
-        ```
-        73 74 72 69 6E 67 20 76 61 6C 75 65
-        ```
-    '''
-    text = ''
+    Output:
+    ```
+    73 74 72 69 6E 67 20 76 61 6C 75 65
+    ```
+    """
+    text = ""
 
     for char in line:
         value = locate_item(conversion, char)

@@ -8,11 +8,19 @@ namespace Window
 {
     public class Program
     {
+        static readonly string TargetFolder = "Converter_(ASCII_to_Whatever)";
         static readonly string FileName = "output.txt";
+        static readonly string PythonVersion = "313";
 
-        static readonly string OutputPath = Path.Combine(Environment.CurrentDirectory, FileName);
-        static readonly string ConversionPath = Path.Combine(Environment.CurrentDirectory, "conversion\\");
-        static readonly string PythonPath = Convert.ToString(Environment.GetEnvironmentVariable("PYTHON_PATH"));
+        static string OutputPath;
+        static string ConversionPath;
+        static readonly string PythonPath = Path.Combine(
+            Environment.GetEnvironmentVariable("LOCALAPPDATA"), 
+            "Programs", 
+            "Python", 
+            $"Python{PythonVersion}", 
+            $"python{PythonVersion}.dll"
+        );
 
         static Form mainWindow;
         static TextBox conversionBox;
@@ -23,14 +31,18 @@ namespace Window
         [STAThread]
         static void Main()
         {
-            var dotenv = Path.Combine(Environment.CurrentDirectory, ".env");
-            DotEnv.Load(dotenv);
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo dirInfo = new(currentDirectory);
 
-            RunApp();
-        }
+            while (dirInfo != null && dirInfo.Name != TargetFolder)
+            {
+                dirInfo = dirInfo.Parent;
+            }
 
-        static void RunApp()
-        {
+            string basePath = dirInfo?.FullName;
+            OutputPath = Path.Combine(basePath, FileName);
+            ConversionPath = Path.Combine(basePath, "conversion\\");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -72,8 +84,8 @@ namespace Window
             options.Items.Add("Decimal");
             options.Items.Add("Hexadecimal");
 
-            convertBtn.Click += new EventHandler(_convertBtn_Clicked);
-            saveFileBtn.Click += new EventHandler(_saveFileBtn_Clicked);
+            convertBtn.Click += new EventHandler(ConvertBtn_Clicked);
+            saveFileBtn.Click += new EventHandler(SaveFileBtn_Clicked);
 
             mainWindow.Controls.Add(conversionBox);
             mainWindow.Controls.Add(options);
@@ -86,7 +98,7 @@ namespace Window
         private static string ConvertString(string text, string option)
         {
             string result = "";
-                    
+            
             using (Py.GIL())
             {
                 dynamic sys = Py.Import("sys");
@@ -95,7 +107,7 @@ namespace Window
                 var script = Py.Import("convert");
                 var PyText = new PyString(text);
                 var PyOpt = new PyString(option);
-                var PyResult = script.InvokeMethod("give_value", new PyObject[] {PyText, PyOpt});
+                var PyResult = script.InvokeMethod("give_value", [PyText, PyOpt]);
                 result = PyResult.ToString();
             }
 
@@ -106,7 +118,7 @@ namespace Window
             return conversion;
         }
 
-        private static void _convertBtn_Clicked(object sender, EventArgs e)
+        private static void ConvertBtn_Clicked(object sender, EventArgs e)
         {
             string text = conversionBox.Text;
             string opt = options.GetItemText(options.SelectedItem);
@@ -134,20 +146,18 @@ namespace Window
 
                     if (BoxResult == DialogResult.Yes)
                     {
-                        using (StreamWriter writer = File.AppendText(OutputPath))
-                        {
-                            writer.WriteLine(
-                                            "Dialog Save" + "\n" + 
-                                            "--------------------" + "\n" +
-                                            converted_text
-                                        );
-                        }
+                        using StreamWriter writer = File.AppendText(OutputPath);
+                        writer.WriteLine(
+                                        "Dialog Save" + "\n" + 
+                                        "--------------------" + "\n" +
+                                        converted_text
+                                    );
                     }
                 }
             }
         }
 
-        private static void _saveFileBtn_Clicked(object sender, EventArgs e)
+        private static void SaveFileBtn_Clicked(object sender, EventArgs e)
         {
             string text = conversionBox.Text;
             string opt = options.GetItemText(options.SelectedItem);
@@ -166,14 +176,12 @@ namespace Window
                 {
                     string converted_text = ConvertString(text, opt);
 
-                    using (StreamWriter writer = File.AppendText(OutputPath))
-                    {
-                        writer.WriteLine(
-                                        "Save without Dialog" + "\n" + 
-                                        "--------------------" + "\n" +
-                                        converted_text
-                                    );
-                    }
+                    using StreamWriter writer = File.AppendText(OutputPath);
+                    writer.WriteLine(
+                                    "Save without Dialog" + "\n" + 
+                                    "--------------------" + "\n" +
+                                    converted_text
+                                );
                 }
             }
         }
