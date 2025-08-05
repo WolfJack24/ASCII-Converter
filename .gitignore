@@ -8,5 +8,5 @@ conversion/__pycache__/
 # Ignore output files
 output.txt
 
-# Ignore .env file
-.env
+# Ignore Visual Studio Folder
+.vs/
