@@ -21,4 +21,4 @@ and when done, `dotnet run` to get everything sorted.
 
 Or 
 
-<key>F5</key> in Visual Studio to run the project.
+`F5` in Visual Studio to run the project.
